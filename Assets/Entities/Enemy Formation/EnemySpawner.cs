@@ -8,20 +8,20 @@ public class EnemySpawner : MonoBehaviour {
 	public float height = 5f;
 	public float speed = 1f;
 	public float padding = 5f;
-	string direction = "left";
-	float xMin;
-	float xMax;
+	
+	private bool movingRight = false;
+	private float xMin;
+	private float xMax;
 	
 	// Use this for initialization
 	void Start () {	
 		// Determine the left and right boundaries of the game space
-		float distance = transform.position.z - Camera.main.transform.position.z;
-		Vector3 leftMost = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance));
-		Vector3 rightMost = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, distance));
+		Vector3 leftBoundary = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0));
+		Vector3 rightBoundary = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, 0));
 		
 		// Define the minimum and maximum x coordinates of the game space
-		xMin = leftMost.x + padding;
-		xMax = rightMost.x - padding;
+		xMin = leftBoundary.x + padding;
+		xMax = rightBoundary.x - padding;
 			
 		// Loop through each child items (positions) within the EnemyFormation collection
 		foreach(Transform child in transform) {
@@ -37,20 +37,22 @@ public class EnemySpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(direction == "left") {
+		if(!movingRight) {
 			if(transform.position.x > xMin) {
 				transform.position += Vector3.left * speed * Time.deltaTime;
 			} else {
-				direction = "right";
+				movingRight = true;
 			}
-		} else if(direction == "right") {
+		} else {
 			if(transform.position.x < xMax) {
 				transform.position += Vector3.right * speed * Time.deltaTime;
 			} else {
-				direction = "left";
+				movingRight = false;
+				
 			}		
 		}
 		
+		// Restrict the x position to be between the calculated xMin and xMax coordinates
 		transform.position = new Vector3(Mathf.Clamp(transform.position.x, xMin, xMax), transform.position.y, transform.position.z);
 	}
 }
