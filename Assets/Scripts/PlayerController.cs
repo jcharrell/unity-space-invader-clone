@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
 	public float speed = 15.0f;
-	
+	public float padding = 0.55f;
 	float xMin;
 	float xMax;
 	
@@ -14,8 +14,8 @@ public class PlayerController : MonoBehaviour {
 		Vector3 leftMost = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance));
 		Vector3 rightMost = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, distance));
 		
-		xMin = leftMost.x + 0.55f;
-		xMax = rightMost.x - 0.55f;
+		xMin = leftMost.x + padding;
+		xMax = rightMost.x - padding;
 	}
 	
 	// Update is called once per frame
