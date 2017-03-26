@@ -26,7 +26,9 @@ public class PlayerController : MonoBehaviour {
 		} else if (Input.GetKey(KeyCode.RightArrow)) {
 			this.transform.position += Vector3.right * speed * Time.deltaTime;
 		} else if (Input.GetKeyDown(KeyCode.Space)) {
-			GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity) as GameObject;
+			Vector3 laserPostion = new Vector3(transform.position.x, transform.position.y + 0.7f, transform.position.z);
+			GameObject laser = Instantiate(laserPrefab, laserPostion, Quaternion.identity) as GameObject;
+			// Make this laser instance a child of the player component folder
 			laser.transform.parent = transform;
 		}
 		
