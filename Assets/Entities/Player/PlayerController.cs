@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour {
 		} else if (Input.GetKeyDown(KeyCode.Space)) {
 			Vector3 projectilePosition = new Vector3(transform.position.x, transform.position.y + 0.7f, transform.position.z);
 			GameObject laser = Instantiate(projectile, projectilePosition, Quaternion.identity) as GameObject;
-			// Make this laser instance a child of the player component folder
+			// Make this projectile instance a child of the player component folder
 			projectile.transform.parent = transform;
 		}
 		
