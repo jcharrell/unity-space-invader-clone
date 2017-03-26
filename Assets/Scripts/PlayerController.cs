@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
-	public float speed;
+	public float speed = 15.0f;
 	
 	// Use this for initialization
 	void Start () {
@@ -12,14 +12,10 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-			Vector3 position = this.transform.position;
-			position.x = position.x - speed;
-			this.transform.position = position;
-		} else if (Input.GetKeyDown(KeyCode.RightArrow)) {
-			Vector3 position = this.transform.position;
-			position.x = position.x + speed;
-			this.transform.position = position;
+		if (Input.GetKey(KeyCode.LeftArrow)) {
+			this.transform.position += new Vector3(-speed * Time.deltaTime, 0, 0);
+		} else if (Input.GetKey(KeyCode.RightArrow)) {
+			this.transform.position += new Vector3(speed * Time.deltaTime, 0, 0);
 		}
 	}
 }
