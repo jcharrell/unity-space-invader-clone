@@ -8,8 +8,9 @@ public class PlayerController : MonoBehaviour {
 	public GameObject projectile;
 	public float projectileSpeed;
 	public float firingRate = 0.2;
-	float xMin;
-	float xMax;
+	
+	private float xMin;
+	private float xMax;
 	
 	// Use this for initialization
 	void Start () {
