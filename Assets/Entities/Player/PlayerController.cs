@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour {
 
 	public float speed = 15.0f;
 	public float padding = 0.55f;
-	public GameObject laserPrefab;
+	public GameObject projectile;
 	float xMin;
 	float xMax;
 	
@@ -26,10 +26,10 @@ public class PlayerController : MonoBehaviour {
 		} else if (Input.GetKey(KeyCode.RightArrow)) {
 			this.transform.position += Vector3.right * speed * Time.deltaTime;
 		} else if (Input.GetKeyDown(KeyCode.Space)) {
-			Vector3 laserPostion = new Vector3(transform.position.x, transform.position.y + 0.7f, transform.position.z);
-			GameObject laser = Instantiate(laserPrefab, laserPostion, Quaternion.identity) as GameObject;
+			Vector3 projectilePosition = new Vector3(transform.position.x, transform.position.y + 0.7f, transform.position.z);
+			GameObject laser = Instantiate(projectile, projectilePosition, Quaternion.identity) as GameObject;
 			// Make this laser instance a child of the player component folder
-			laser.transform.parent = transform;
+			projectile.transform.parent = transform;
 		}
 		
 		// Restrict player position on the x axis
