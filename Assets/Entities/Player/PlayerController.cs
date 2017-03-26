@@ -52,6 +52,6 @@ public class PlayerController : MonoBehaviour {
 		laser.rigidbody2D.velocity = new Vector3(0, projectileSpeed, 0);
 		
 		// Make this projectile instance a child of the player component folder
-		projectile.transform.parent = transform;
+		//projectile.transform.parent = transform;
 	}
 }
