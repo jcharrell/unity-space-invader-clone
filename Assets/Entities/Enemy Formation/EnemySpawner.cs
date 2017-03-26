@@ -4,6 +4,8 @@ using System.Collections;
 public class EnemySpawner : MonoBehaviour {
 
 	public GameObject enemyPrefab;
+	public float width = 10f;
+	public float height = 5f;
 	
 	// Use this for initialization
 	void Start () {		
