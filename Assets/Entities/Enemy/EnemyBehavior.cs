@@ -11,7 +11,7 @@ public class EnemyBehavior : MonoBehaviour {
 		// Determine if hit by a projectile
 		if(projectile) {
 			projectile.Hit();
-			health = health - projectile.GetDamage();
+			health -= projectile.GetDamage();
 			if(health <= 0) {
 				Destroy(gameObject);
 			}
