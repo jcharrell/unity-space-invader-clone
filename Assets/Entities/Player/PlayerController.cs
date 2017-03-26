@@ -30,12 +30,11 @@ public class PlayerController : MonoBehaviour {
 		
 		// Fire projectile
 		if (Input.GetKeyDown(KeyCode.Space)) {
-			Vector3 projectilePosition = new Vector3(transform.position.x, transform.position.y + 0.7f, transform.position.z);
-			GameObject laser = Instantiate(projectile, projectilePosition, Quaternion.identity) as GameObject;
-			laser.rigidbody2D.velocity = new Vector3(0, projectileSpeed, 0);
-			
-			// Make this projectile instance a child of the player component folder
-			projectile.transform.parent = transform;
+			InvokeRepeating("fire", 0.1f, 0.2f);
+		}
+		
+		if (Input.GetKeyUp(KeyCode.Space)) {
+			CancelInvoke();
 		}
 		
 		// Restrict player position on the x axis
@@ -43,5 +42,14 @@ public class PlayerController : MonoBehaviour {
 		
 		// Update the player position, ensuring they are within the gamespace
 		this.transform.position = new Vector3(newX, this.transform.position.y, this.transform.position.z);
+	}
+	
+	void fire() {
+		Vector3 projectilePosition = new Vector3(transform.position.x, transform.position.y + 0.7f, transform.position.z);
+		GameObject laser = Instantiate(projectile, projectilePosition, Quaternion.identity) as GameObject;
+		laser.rigidbody2D.velocity = new Vector3(0, projectileSpeed, 0);
+		
+		// Make this projectile instance a child of the player component folder
+		projectile.transform.parent = transform;
 	}
 }
