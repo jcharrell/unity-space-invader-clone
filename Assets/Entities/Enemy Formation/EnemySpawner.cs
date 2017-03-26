@@ -37,19 +37,14 @@ public class EnemySpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(transform.position.x == xMin || transform.position.x == xMax) {
+			movingRight = !movingRight;
+		}
+		
 		if(!movingRight) {
-			if(transform.position.x > xMin) {
-				transform.position += Vector3.left * speed * Time.deltaTime;
-			} else {
-				movingRight = true;
-			}
+			transform.position += Vector3.left * speed * Time.deltaTime;
 		} else {
-			if(transform.position.x < xMax) {
-				transform.position += Vector3.right * speed * Time.deltaTime;
-			} else {
-				movingRight = false;
-				
-			}		
+			transform.position += Vector3.right * speed * Time.deltaTime;
 		}
 		
 		// Restrict the x position to be between the calculated xMin and xMax coordinates
