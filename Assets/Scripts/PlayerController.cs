@@ -5,12 +5,17 @@ public class PlayerController : MonoBehaviour {
 
 	public float speed = 15.0f;
 	
-	float xMin = -5.0f;
-	float xMax = 5.0f;
+	float xMin;
+	float xMax;
 	
 	// Use this for initialization
 	void Start () {
-	
+		float distance = transform.position.z - Camera.main.transform.position.z;
+		Vector3 leftMost = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance));
+		Vector3 rightMost = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, distance));
+		
+		xMin = leftMost.x + 0.55f;
+		xMax = rightMost.x - 0.55f;
 	}
 	
 	// Update is called once per frame
