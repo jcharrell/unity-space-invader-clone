@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour {
 	public float padding = 0.55f;
 	public GameObject projectile;
 	public float projectileSpeed;
-	public float firingRate = 0.2;
+	public float firingRate = 0.2f;
 	
 	private float xMin;
 	private float xMax;
