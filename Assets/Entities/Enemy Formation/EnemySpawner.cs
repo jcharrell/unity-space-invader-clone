@@ -17,6 +17,10 @@ public class EnemySpawner : MonoBehaviour {
 		}
 	}
 	
+	public void OnDrawGizmos() {
+		Gizmos.DrawWireCube(transform.position, new Vector3(width, height));
+	}
+	
 	// Update is called once per frame
 	void Update () {
 	
