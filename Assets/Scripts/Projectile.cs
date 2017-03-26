@@ -8,4 +8,8 @@ public class Projectile : MonoBehaviour {
 	public void Hit() {
 		Destroy(gameObject);
 	}
+	
+	public float GetDamage() {
+		return damage;
+	}
 }
