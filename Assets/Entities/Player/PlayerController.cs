@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour {
 	public float speed = 15.0f;
 	public float padding = 0.55f;
 	public GameObject projectile;
+	public float projectileSpeed;
 	float xMin;
 	float xMax;
 	
@@ -25,9 +26,14 @@ public class PlayerController : MonoBehaviour {
 			this.transform.position += Vector3.left * speed * Time.deltaTime;
 		} else if (Input.GetKey(KeyCode.RightArrow)) {
 			this.transform.position += Vector3.right * speed * Time.deltaTime;
-		} else if (Input.GetKeyDown(KeyCode.Space)) {
+		}
+		
+		// Fire projectile
+		if (Input.GetKeyDown(KeyCode.Space)) {
 			Vector3 projectilePosition = new Vector3(transform.position.x, transform.position.y + 0.7f, transform.position.z);
 			GameObject laser = Instantiate(projectile, projectilePosition, Quaternion.identity) as GameObject;
+			laser.rigidbody2D.velocity = new Vector3(0, projectileSpeed, 0);
+			
 			// Make this projectile instance a child of the player component folder
 			projectile.transform.parent = transform;
 		}
