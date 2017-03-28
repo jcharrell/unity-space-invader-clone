@@ -4,6 +4,16 @@ using System.Collections;
 public class EnemyBehavior : MonoBehaviour {
 
 	public float health = 200f;
+	public GameObject projectilePrefab;
+	public float projectileSpeed = 1f;
+	
+	public void Update() {
+		Vector3 projectilePosition = new Vector3(transform.position.x, transform.position.y - 0.7f, transform.position.z);
+		
+		GameObject projectile = Instantiate (projectilePrefab, projectilePosition, Quaternion.identity) as GameObject;
+		projectile.rigidbody2D.velocity = new Vector3(0, -projectileSpeed, 0);
+		
+	}
 	
 	public void OnTriggerEnter2D(Collider2D collider) {
 		Projectile projectile = collider.gameObject.GetComponent<Projectile>();

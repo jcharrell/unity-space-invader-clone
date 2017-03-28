@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour {
 
 	public float speed = 15.0f;
 	public float padding = 0.55f;
+	public float health = 300f;
 	public GameObject projectile;
 	public float projectileSpeed;
 	public float firingRate = 0.2f;
@@ -12,6 +13,19 @@ public class PlayerController : MonoBehaviour {
 	private float xMin;
 	private float xMax;
 	
+	public void OnTriggerEnter2D(Collider2D collider) {
+		Projectile projectile = collider.gameObject.GetComponent<Projectile>();
+		
+		if(projectile) {
+			projectile.Hit();
+			
+			health -= projectile.GetDamage();
+			if(health <= 0) {
+				Destroy (gameObject);
+			}
+		}
+	}
+
 	// Use this for initialization
 	void Start () {
 		float distance = transform.position.z - Camera.main.transform.position.z;
