@@ -23,12 +23,7 @@ public class FormationController : MonoBehaviour {
 		xMin = leftBoundary.x + padding;
 		xMax = rightBoundary.x - padding;
 			
-		// Loop through each child items (positions) within the EnemyFormation collection
-		foreach(Transform child in transform) {
-			// Spawn enemies on each position
-			GameObject enemy = Instantiate(enemyPrefab, child.transform.position, Quaternion.identity) as GameObject;
-			enemy.transform.parent = child;
-		}
+		SpawnEnemies();
 	}
 	
 	public void OnDrawGizmos() {
@@ -49,5 +44,29 @@ public class FormationController : MonoBehaviour {
 		
 		// Restrict the x position to be between the calculated xMin and xMax coordinates
 		transform.position = new Vector3(Mathf.Clamp(transform.position.x, xMin, xMax), transform.position.y, transform.position.z);
+		
+		if(AllMembersDead()) {
+			SpawnEnemies();
+		}
 	}
+	
+	public void SpawnEnemies() {
+		// Loop through each child items (positions) within the EnemyFormation collection
+		foreach(Transform child in transform) {
+			// Spawn enemies on each position
+			GameObject enemy = Instantiate(enemyPrefab, child.transform.position, Quaternion.identity) as GameObject;
+			enemy.transform.parent = child;
+		}
+	}
+	
+	public bool AllMembersDead() {
+		foreach(Transform child in transform) {
+			if(child.childCount > 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	
 }
