@@ -8,6 +8,7 @@ public class FormationController : MonoBehaviour {
 	public float height = 5f;
 	public float speed = 1f;
 	public float padding = 5f;
+	public float spawnDelay = 0.5f;
 	
 	private bool movingRight = false;
 	private float xMin;
@@ -23,7 +24,7 @@ public class FormationController : MonoBehaviour {
 		xMin = leftBoundary.x + padding;
 		xMax = rightBoundary.x - padding;
 			
-		SpawnEnemies();
+		SpawnUntilFull();
 	}
 	
 	public void OnDrawGizmos() {
@@ -46,17 +47,32 @@ public class FormationController : MonoBehaviour {
 		transform.position = new Vector3(Mathf.Clamp(transform.position.x, xMin, xMax), transform.position.y, transform.position.z);
 		
 		if(AllMembersDead()) {
-			SpawnEnemies();
+			SpawnUntilFull();
 		}
 	}
 	
-	public void SpawnEnemies() {
-		// Loop through each child items (positions) within the EnemyFormation collection
-		foreach(Transform child in transform) {
+	public void SpawnUntilFull() {
+		Transform nextFreePosition = NextFreePosition();
+		
+		if (nextFreePosition) {
 			// Spawn enemies on each position
-			GameObject enemy = Instantiate(enemyPrefab, child.transform.position, Quaternion.identity) as GameObject;
-			enemy.transform.parent = child;
+			GameObject enemy = Instantiate(enemyPrefab, nextFreePosition.position, Quaternion.identity) as GameObject;
+			enemy.transform.parent = nextFreePosition;
 		}
+		
+		if(NextFreePosition()) {
+			Invoke("SpawnUntilFull", spawnDelay);
+		}
+
+	}
+	
+	private Transform NextFreePosition() {
+		foreach(Transform child in transform) {
+			if(child.childCount == 0) {
+				return child;
+			}
+		}
+		return null;
 	}
 	
 	public bool AllMembersDead() {
