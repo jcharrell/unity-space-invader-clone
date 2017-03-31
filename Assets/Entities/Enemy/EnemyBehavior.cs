@@ -9,7 +9,7 @@ public class EnemyBehavior : MonoBehaviour {
 	public float firingRate = 0.5f;
 	public int pointValue = 20;
 	public AudioClip fireSound;
-	public AudioClip destroyedSound;
+	public AudioClip deathSound;
 	
 	private ScoreKeeper scoreKeeper;
 	
@@ -33,9 +33,7 @@ public class EnemyBehavior : MonoBehaviour {
 			projectile.Hit();
 			health -= projectile.GetDamage();
 			if(health <= 0) {
-				Destroy(gameObject);
-				AudioSource.PlayClipAtPoint(destroyedSound, transform.position);
-				scoreKeeper.addPoints(pointValue);
+				die();
 			}
 		}
 	}
@@ -45,5 +43,11 @@ public class EnemyBehavior : MonoBehaviour {
 		GameObject projectile = Instantiate (projectilePrefab, projectilePosition, Quaternion.identity) as GameObject;
 		projectile.rigidbody2D.velocity = new Vector3(0, -projectileSpeed, 0);
 		AudioSource.PlayClipAtPoint(fireSound, transform.position);
+	}
+	
+	private void die() {
+		Destroy(gameObject);
+		AudioSource.PlayClipAtPoint(deathSound, transform.position);
+		scoreKeeper.addPoints(pointValue);
 	}
 }
