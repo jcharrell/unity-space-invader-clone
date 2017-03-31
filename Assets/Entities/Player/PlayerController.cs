@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour {
 	public GameObject projectile;
 	public float projectileSpeed;
 	public float firingRate = 0.2f;
+	public AudioClip fireSound;
 	
 	private float xMin;
 	private float xMax;
@@ -65,7 +66,9 @@ public class PlayerController : MonoBehaviour {
 		GameObject laser = Instantiate(projectile, projectilePosition, Quaternion.identity) as GameObject;
 		laser.rigidbody2D.velocity = new Vector3(0, projectileSpeed, 0);
 		
+		AudioSource.PlayClipAtPoint(fireSound, transform.position);
+		
 		// Make this projectile instance a child of the player component folder
-		//projectile.transform.parent = transform;
+		//laser.transform.parent = transform;
 	}
 }

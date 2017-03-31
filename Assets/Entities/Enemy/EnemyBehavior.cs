@@ -8,6 +8,8 @@ public class EnemyBehavior : MonoBehaviour {
 	public float projectileSpeed = 1f;
 	public float firingRate = 0.5f;
 	public int pointValue = 20;
+	public AudioClip fireSound;
+	public AudioClip destroyedSound;
 	
 	private ScoreKeeper scoreKeeper;
 	
@@ -32,6 +34,7 @@ public class EnemyBehavior : MonoBehaviour {
 			health -= projectile.GetDamage();
 			if(health <= 0) {
 				Destroy(gameObject);
+				AudioSource.PlayClipAtPoint(destroyedSound, transform.position);
 				scoreKeeper.addPoints(pointValue);
 			}
 		}
@@ -41,5 +44,6 @@ public class EnemyBehavior : MonoBehaviour {
 		Vector3 projectilePosition = new Vector3(transform.position.x, transform.position.y - 0.7f, transform.position.z);
 		GameObject projectile = Instantiate (projectilePrefab, projectilePosition, Quaternion.identity) as GameObject;
 		projectile.rigidbody2D.velocity = new Vector3(0, -projectileSpeed, 0);
+		AudioSource.PlayClipAtPoint(fireSound, transform.position);
 	}
 }
