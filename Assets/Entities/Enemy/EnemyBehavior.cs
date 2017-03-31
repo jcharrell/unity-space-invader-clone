@@ -39,8 +39,8 @@ public class EnemyBehavior : MonoBehaviour {
 	}
 	
 	private void fire() {
-		Vector3 projectilePosition = new Vector3(transform.position.x, transform.position.y - 0.7f, transform.position.z);
-		GameObject projectile = Instantiate (projectilePrefab, projectilePosition, Quaternion.identity) as GameObject;
+		//Vector3 projectilePosition = new Vector3(transform.position.x, transform.position.y - 0.7f, transform.position.z);
+		GameObject projectile = Instantiate (projectilePrefab, transform.position, Quaternion.identity) as GameObject;
 		projectile.rigidbody2D.velocity = new Vector3(0, -projectileSpeed, 0);
 		AudioSource.PlayClipAtPoint(fireSound, transform.position);
 	}

@@ -62,8 +62,8 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	void fire() {
-		Vector3 projectilePosition = new Vector3(transform.position.x, transform.position.y + 0.7f, transform.position.z);
-		GameObject laser = Instantiate(projectile, projectilePosition, Quaternion.identity) as GameObject;
+		//Vector3 projectilePosition = new Vector3(transform.position.x, transform.position.y + 0.7f, transform.position.z);
+		GameObject laser = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;
 		laser.rigidbody2D.velocity = new Vector3(0, projectileSpeed, 0);
 		
 		AudioSource.PlayClipAtPoint(fireSound, transform.position);
