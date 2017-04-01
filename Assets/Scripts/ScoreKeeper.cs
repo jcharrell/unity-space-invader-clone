@@ -4,12 +4,14 @@ using System.Collections;
 
 public class ScoreKeeper : MonoBehaviour {
 
-	static int score;
+	public static int score;
 	private Text uiText;
 	
-	void Start() {
+	public void Start() {
 		score = 0;
 		uiText = GetComponent<Text>();
+		reset ();
+		updateUI();
 	}
 	
 	public void addPoints(int points) {
@@ -17,9 +19,8 @@ public class ScoreKeeper : MonoBehaviour {
 		updateUI();
 	}
 	
-	public void reset() {
+	public static void reset() {
 		score = 0;
-		updateUI();
 	}
 	
 	private void updateUI() {

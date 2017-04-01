@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour {
 			
 			health -= projectile.GetDamage();
 			if(health <= 0) {
+				LevelManager levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+				levelManager.LoadNextLevel();
+
 				Destroy (gameObject);
 			}
 		}
